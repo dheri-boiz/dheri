@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search and Sort</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        /* Add your styles here */
+    </style>
+</head>
+<body>
+
+    <h2>Integer Search and Sort</h2>
+
+    <label for="numberInput">Enter Numbers (comma-separated):</label>
+    <input type="text" id="numberInput" placeholder="e.g., 5, 2, 8, 1">
+    <button onclick="processNumbers()">Process Numbers</button>
+
+    <div>
+        <label for="searchInput">Search Number:</label>
+        <input type="text" id="searchInput" placeholder="Enter a number to search">
+        <button onclick="searchNumber()">Search</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+        let numbers = []; // Declare numbers as a global variable
+
+        function processNumbers() {
+            const input = $('#numberInput').val();
+            numbers = input.split(',').map(Number);
+
+            // Validate input
+            if (numbers.some(isNaN)) {
+                $('#result').text('Please enter valid numbers.');
+                return;
+            }
+
+            // Sort the numbers
+            numbers.sort((a, b) => a - b);
+
+            // Display the sorted numbers
+            $('#result').html(`<p>Sorted Numbers: ${numbers.join(', ')}</p>`);
+        }
+
+        function searchNumber() {
+            const input = $('#searchInput').val();
+            const searchValue = parseInt(input);
+
+            // Validate input
+            if (isNaN(searchValue)) {
+                $('#result').text('Please enter a valid number to search.');
+                return;
+            }
+
+            // Search for the number
+            const index = numbers.indexOf(searchValue);
+
+            if (index !== -1) {
+                $('#result').html(`<p>Number ${searchValue} found at index ${index}.</p>`);
+            } else {
+                $('#result').html(`<p>Number ${searchValue} not found.</p>`);
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery List Copy</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        /* Some basic styling for demonstration */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #container {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>List Copy with jQuery</h2>
+
+    <div id="container">
+        <div>
+            <h3>List 1</h3>
+            <ul id="list1" class="list">
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
+        </div>
+
+        <div>
+            <h3>List 2</h3>
+            <ul id="list2" class="list">
+                <!-- This list will be populated dynamically using jQuery -->
+            </ul>
+        </div>
+    </div>
+
+    <button id="copyButton">Copy to List 2</button>
+
+    <script>
+        $(document).ready(function() {
+            // Function to copy contents from list1 to list2
+            $("#copyButton").on("click", function() {
+                // Clear existing items in list2
+                $("#list2").empty();
+
+                // Copy items from list1 to list2
+                $("#list1 li").each(function() {
+                    // Clone the list item and append it to list2
+                    $("#list2").append($(this).clone());
+                });
+            });
+
+            // Create another element using jQuery
+            var newElement = $("<p>").text("This is a new paragraph created with jQuery.");
+            $("#container").append(newElement);
+        });
+    </script>
+
+</body>
+</html>
+
+
+<!-- // without jquery
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript List Copy</title>
+    <style>
+        /* Some basic styling for demonstration */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #container {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>List Copy without jQuery</h2>
+
+    <div id="container">
+        <div>
+            <h3>List 1</h3>
+            <ul id="list1" class="list">
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
+        </div>
+
+        <div>
+            <h3>List 2</h3>
+            <ul id="list2" class="list">
+                
+            </ul>
+        </div>
+    </div>
+
+    <button id="copyButton" onclick="copyList()">Copy to List 2</button>
+
+    <script>
+        function copyList() {
+            // Clear existing items in list2
+            var list2 = document.getElementById("list2");
+            list2.innerHTML = "";
+
+            // Copy items from list1 to list2
+            var list1Items = document.getElementById("list1").getElementsByTagName("li");
+            for (var i = 0; i < list1Items.length; i++) {
+                var newItem = list1Items[i].cloneNode(true);
+                list2.appendChild(newItem);
+            }
+        }
+
+        // Create another element using JavaScript
+        var newElement = document.createElement("p");
+        newElement.textContent = "This is a new paragraph created with JavaScript.";
+        document.getElementById("container").appendChild(newElement);
+    </script>
+
+</body>
+</html> -->
