@@ -48,3 +48,50 @@ app.post('/login', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+
+
+========================================================================================================================
+
+  import React, { useState } from 'react';
+import axios from 'axios';
+
+const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/login', {
+        username: username,
+        password: password
+      });
+
+      console.log('Login successful:', response.data);
+      // Handle successful login, e.g., redirect to a new page
+    } catch (error) {
+      console.error('Login error:', error.response ? error.response.data : error.message);
+      // Handle login error, e.g., display an error message
+    }
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button onClick={handleLogin}>Login</button>
+    </div>
+  );
+};
+
+export default Login;
